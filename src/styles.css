@@ -1,0 +1,269 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * CEOs with Molka — design system
+ * Navy #14213D · Ivory #FAF7F2 · Terracotta #C97B4A
+ * Display: Noto Kufi Arabic · Body: IBM Plex Sans Arabic
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --font-display: "Noto Kufi Arabic", "Segoe UI", sans-serif;
+  --font-sans: "IBM Plex Sans Arabic", "Segoe UI", sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ivory: var(--ivory);
+  --color-terracotta: var(--terracotta);
+  --color-on-ink: var(--on-ink);
+  --color-on-ink-muted: var(--on-ink-muted);
+}
+
+:root {
+  --radius: 0.5rem;
+
+  --ivory: oklch(0.968 0.008 85);
+  --ink: oklch(0.256 0.062 267);
+  --ink-soft: oklch(0.318 0.058 267);
+  --terracotta: oklch(0.641 0.106 51);
+  --on-ink: oklch(0.972 0.008 85);
+  --on-ink-muted: oklch(0.83 0.014 85 / 82%);
+
+  --background: var(--ivory);
+  --foreground: var(--ink);
+  --card: oklch(0.988 0.005 85);
+  --card-foreground: var(--ink);
+  --popover: oklch(0.988 0.005 85);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--on-ink);
+  --secondary: oklch(0.94 0.01 85);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.94 0.01 85);
+  --muted-foreground: oklch(0.5 0.03 267);
+  --accent: var(--terracotta);
+  --accent-foreground: oklch(0.99 0.005 85);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(0.88 0.012 85);
+  --input: oklch(0.88 0.012 85);
+  --ring: var(--terracotta);
+
+  --hero-overlay: linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--ink) 55%, transparent),
+    color-mix(in oklab, var(--ink) 42%, transparent) 45%,
+    color-mix(in oklab, var(--ink) 72%, transparent)
+  );
+  --shadow-editorial: 0 24px 60px -28px color-mix(in oklab, var(--ink) 45%, transparent);
+  --shadow-lift: 0 32px 70px -30px color-mix(in oklab, var(--ink) 60%, transparent);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-wrap: pretty;
+    overflow-x: clip;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 2px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: var(--terracotta);
+    color: var(--on-ink);
+  }
+}
+
+/* ---------- layout primitives ---------- */
+
+@utility container-90 {
+  width: 90%;
+  margin-inline: auto;
+  max-width: 1600px;
+}
+
+@utility container-hero {
+  width: 87%;
+  margin-inline: auto;
+  max-width: 1500px;
+  text-align: center;
+}
+
+@utility snap-root {
+  scroll-snap-type: y proximity;
+}
+
+@utility snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+@utility screen-section {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 5.5rem 3.5rem;
+}
+
+@media (min-width: 640px) {
+  .screen-section {
+    padding-block: 7rem 4rem;
+  }
+}
+
+@utility kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  font-weight: 600;
+}
+
+@utility hero-overlay {
+  background-image: var(--hero-overlay);
+}
+
+@utility rule-accent {
+  position: relative;
+}
+
+/* ---------- motion ---------- */
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-ken {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@utility reveal {
+  opacity: 0;
+}
+
+@utility animate-fade-in {
+  animation: fade-in 0.35s var(--ease-soft) both;
+}
+
+@utility animate-hero-ken {
+  animation: hero-ken 14s var(--ease-soft) both;
+}
+
+.reveal.is-visible {
+  animation: reveal-up 0.75s var(--ease-soft) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+  }
+  .reveal,
+  .reveal.is-visible,
+  .animate-fade-in,
+  .animate-hero-ken {
+    opacity: 1;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ---------- arabic typography tuning ---------- */
+
+.font-arabic {
+  letter-spacing: 0;
+}
+
+.font-arabic h1,
+.font-arabic h2,
+.font-arabic h3 {
+  line-height: 1.45;
+  letter-spacing: 0;
+}
